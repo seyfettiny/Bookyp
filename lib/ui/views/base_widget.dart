@@ -14,6 +14,7 @@ class BaseWidget<T extends ChangeNotifier> extends StatefulWidget {
     this.onModelReady,
   }) : super(key: key);
 
+  @override
   _BaseWidgetState<T> createState() => _BaseWidgetState<T>();
 }
 
