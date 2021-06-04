@@ -12,16 +12,17 @@ class _LoginViewState extends State<LoginView> {
   @override
   Widget build(BuildContext context) {
     return BaseWidget<LoginViewModel>(
-        builder: (context, model, child) {
-          return Scaffold(
-            body: Container(
-              child: Text('body'),
-            ),
-          );
-        },
-        model: LoginViewModel(authenticationService: Provider.of(context)),
-        child: Container(
-          child: Text('data'),
-        ));
+      builder: (context, model, child) {
+        return Scaffold(
+          body: Container(
+            child: Text('body'),
+          ),
+        );
+      },
+      model: LoginViewModel(authenticationService: Provider.of(context)),
+      child: Container(
+        child: Text('data'),
+      ),
+    );
   }
 }

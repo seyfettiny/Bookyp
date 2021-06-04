@@ -1,14 +1,31 @@
+import 'package:bookyp/core/generated/locale_keys.g.dart';
+import 'package:bookyp/core/notifiers/theme_notifier.dart';
+import 'package:bookyp/core/theme/light_theme.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:provider/provider.dart';
 
-void main() {
+import 'core/constants/app_constants.dart';
+
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Hive.initFlutter();
+  await EasyLocalization.ensureInitialized();
   runApp(
     EasyLocalization(
-      supportedLocales: [Locale('en', 'US'), Locale('tr', 'TR')],
+      supportedLocales: [
+        const Locale('en', 'US'),
+        const Locale('tr', 'TR'),
+      ],
       path: 'assets/lang',
       fallbackLocale: Locale('en', 'US'),
-      child: MyApp(),
+      saveLocale: false,
+      child: ChangeNotifierProvider<ThemeNotifier>(
+        create: (_) => ThemeNotifier(lightTheme),
+        child: MyApp(),
+      ),
     ),
   );
 }
@@ -16,19 +33,51 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final themeNotifier = Provider.of<ThemeNotifier>(context);
     return MaterialApp(
+      supportedLocales: EasyLocalization.of(context)!.supportedLocales,
       localizationsDelegates: context.localizationDelegates,
-      supportedLocales: context.supportedLocales,
-      locale: context.locale,
-      title: 'Material App',
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text('Material App Bar'),
-        ),
-        body: Center(
-          child: Container(
-            child: Text('Hello World'),
+      locale: EasyLocalization.of(context)!.locale,
+      title: AppConstants.appName,
+      theme: themeNotifier.getTheme,
+      home: NewWidget(themeNotifier: themeNotifier),
+    );
+  }
+}
+
+class NewWidget extends StatelessWidget {
+  const NewWidget({
+    Key? key,
+    required this.themeNotifier,
+  }) : super(key: key);
+
+  final ThemeNotifier themeNotifier;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(LocaleKeys.title.tr()),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.palette),
+            onPressed: () {
+              themeNotifier.setTheme();
+            },
           ),
+          IconButton(
+            icon: Icon(Icons.text_fields),
+            onPressed: () {
+              context.locale == Locale('tr', 'TR')
+                  ? context.setLocale(Locale('en', 'US'))
+                  : context.setLocale(Locale('tr', 'TR'));
+            },
+          )
+        ],
+      ),
+      body: Center(
+        child: Container(
+          child: Text(LocaleKeys.hello_world.tr()),
         ),
       ),
     );
