@@ -1,17 +1,19 @@
-import 'package:bookyp/core/generated/locale_keys.g.dart';
-import 'package:bookyp/core/notifiers/theme_notifier.dart';
-import 'package:bookyp/core/theme/light_theme.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
+import 'core/generated/locale_keys.g.dart';
+import 'core/notifiers/theme_notifier.dart';
 import 'core/constants/app_constants.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await dotenv.load(fileName: '.env');
   await Hive.initFlutter();
+  await Hive.openBox('themeBox');
   await EasyLocalization.ensureInitialized();
   runApp(
     EasyLocalization(
@@ -21,9 +23,8 @@ void main() async {
       ],
       path: 'assets/lang',
       fallbackLocale: Locale('en', 'US'),
-      saveLocale: false,
       child: ChangeNotifierProvider<ThemeNotifier>(
-        create: (_) => ThemeNotifier(lightTheme),
+        create: (_) => ThemeNotifier(),
         child: MyApp(),
       ),
     ),

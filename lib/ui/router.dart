@@ -1,4 +1,4 @@
-import 'package:bookyp/core/constants/route_paths.dart';
+import '../core/constants/route_paths.dart';
 
 import 'views/login_screen.dart';
 import 'package:flutter/cupertino.dart';
