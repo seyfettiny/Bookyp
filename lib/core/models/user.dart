@@ -6,20 +6,20 @@ part 'user.g.dart';
 
 @JsonSerializable()
 class User {
-  String? jwtToken;
-  int id;
-  String mail;
+  String? token;
+  int? id;
+  String? mail;
   String? name;
   User({
-    this.jwtToken,
-    required this.id,
-    required this.mail,
+    this.token,
+    this.id,
+    this.mail,
     this.name,
   });
 
   Map<String, dynamic> toMap() {
     return {
-      'jwtToken': jwtToken,
+      'token': token,
       'id': id,
       'mail': mail,
       'name': name,
@@ -28,7 +28,7 @@ class User {
 
   factory User.fromMap(Map<String, dynamic> map) {
     return User(
-      jwtToken: map['jwtToken'],
+      token: map['token'],
       id: map['id'],
       mail: map['mail'],
       name: map['name'],

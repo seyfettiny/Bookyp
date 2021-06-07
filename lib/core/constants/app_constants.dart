@@ -1,3 +1,4 @@
 class AppConstants {
-  static const String appName = 'Bookyp';
+  static final appName = 'Bookyp';
+  static final email = RegExp(r'^[^\s@]+@[^\s@]+\.[^\s@]+$');
 }

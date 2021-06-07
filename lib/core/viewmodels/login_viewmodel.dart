@@ -6,9 +6,11 @@ class LoginViewModel extends BaseViewModel {
   LoginViewModel({required AuthenticationService authenticationService})
       : _authenticationService = authenticationService;
 
-  Future<bool> login(String userIdText) async {
+  Future<bool> signInWithEmailAndPassword(String email, String password) async {
     setBusy(true);
-    var userId = int.tryParse(userIdText);
-    return await _authenticationService.login(userId);
+    var result = await _authenticationService.signInWithEmailAndPassword(
+        email, password);
+    setBusy(false);
+    return result;
   }
 }

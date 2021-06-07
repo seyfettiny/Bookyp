@@ -1,5 +1,7 @@
+import 'package:bookyp/core/constants/route_paths.dart';
+import 'package:bookyp/provider_setup.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Router;
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
@@ -8,6 +10,8 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'core/generated/locale_keys.g.dart';
 import 'core/notifiers/theme_notifier.dart';
 import 'core/constants/app_constants.dart';
+import 'ui/views/login_screen.dart' as navigation;
+import 'ui/router.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -16,15 +20,15 @@ void main() async {
   await Hive.openBox('themeBox');
   await EasyLocalization.ensureInitialized();
   runApp(
-    EasyLocalization(
-      supportedLocales: [
-        const Locale('en', 'US'),
-        const Locale('tr', 'TR'),
-      ],
-      path: 'assets/lang',
-      fallbackLocale: Locale('en', 'US'),
-      child: ChangeNotifierProvider<ThemeNotifier>(
-        create: (_) => ThemeNotifier(),
+    MultiProvider(
+      providers: providers,
+      child: EasyLocalization(
+        supportedLocales: [
+          const Locale('en', 'US'),
+          const Locale('tr', 'TR'),
+        ],
+        path: 'assets/lang',
+        fallbackLocale: Locale('en', 'US'),
         child: MyApp(),
       ),
     ),
@@ -41,7 +45,8 @@ class MyApp extends StatelessWidget {
       locale: EasyLocalization.of(context)!.locale,
       title: AppConstants.appName,
       theme: themeNotifier.getTheme,
-      home: NewWidget(themeNotifier: themeNotifier),
+      initialRoute: RoutePaths.login,
+      onGenerateRoute: Router.generateRoute,
     );
   }
 }

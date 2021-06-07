@@ -13,6 +13,7 @@ class Book {
   String? detail;
   String title;
   String imgUrl;
+  String bookFileName;
   int id;
   int? price;
   double rating;
@@ -22,6 +23,7 @@ class Book {
     this.detail,
     required this.title,
     required this.imgUrl,
+    required this.bookFileName,
     required this.id,
     this.price,
     required this.rating,
@@ -34,6 +36,7 @@ class Book {
       'detail': detail,
       'title': title,
       'imgUrl': imgUrl,
+      'bookFileName': bookFileName,
       'id': id,
       'price': price,
       'rating': rating,
@@ -43,10 +46,11 @@ class Book {
   factory Book.fromMap(Map<String, dynamic> map) {
     return Book(
       author: map['author'],
-      date: map['date'],
+      date: DateTime.fromMillisecondsSinceEpoch(map['date']),
       detail: map['detail'],
       title: map['title'],
       imgUrl: map['imgUrl'],
+      bookFileName: map['bookFileName'],
       id: map['id'],
       price: map['price'],
       rating: map['rating'],
