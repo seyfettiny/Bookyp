@@ -10,32 +10,20 @@ class User {
   int? id;
   String? mail;
   String? name;
+  List? books;
   User({
     this.token,
     this.id,
     this.mail,
     this.name,
+    this.books,
   });
 
-  Map<String, dynamic> toMap() {
-    return {
-      'token': token,
-      'id': id,
-      'mail': mail,
-      'name': name,
-    };
+  factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
+  Map<String, dynamic> toJson() => _$UserToJson(this);
+
+  @override
+  String toString() {
+    return 'User(token: $token, id: $id, mail: $mail, name: $name, books: $books)';
   }
-
-  factory User.fromMap(Map<String, dynamic> map) {
-    return User(
-      token: map['token'],
-      id: map['id'],
-      mail: map['mail'],
-      name: map['name'],
-    );
-  }
-
-  String toJson() => json.encode(toMap());
-
-  factory User.fromJson(String source) => User.fromMap(json.decode(source));
 }

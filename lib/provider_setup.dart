@@ -1,4 +1,5 @@
-import 'package:bookyp/ui/router.dart';
+import 'core/notifiers/user_notifier.dart';
+import 'ui/router.dart';
 
 import 'core/notifiers/theme_notifier.dart';
 import 'core/services/authentication_service.dart';
@@ -20,6 +21,9 @@ List<SingleChildWidget> independentServices = [
   ),
   ChangeNotifierProvider<ThemeNotifier>(
     create: (_) => ThemeNotifier(),
+  ),
+  ChangeNotifierProvider<UserNotifier>(
+    create: (_) => UserNotifier(),
   ),
   Provider.value(value: Router.instance)
 ];

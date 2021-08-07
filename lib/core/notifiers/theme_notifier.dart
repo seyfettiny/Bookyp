@@ -1,5 +1,6 @@
-import '../theme/dark_theme..dart';
-import '../theme/light_theme.dart';
+import '../../ui/theme/dark_theme..dart';
+import '../../ui/theme/light_theme.dart';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';

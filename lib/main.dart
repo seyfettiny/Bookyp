@@ -1,5 +1,7 @@
-import 'package:bookyp/core/constants/route_paths.dart';
-import 'package:bookyp/provider_setup.dart';
+import 'core/constants/route_paths.dart';
+import 'core/services/api.dart';
+import 'core/services/authentication_service.dart';
+import 'provider_setup.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart' hide Router;
 import 'package:hive/hive.dart';
@@ -10,7 +12,6 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'core/generated/locale_keys.g.dart';
 import 'core/notifiers/theme_notifier.dart';
 import 'core/constants/app_constants.dart';
-import 'ui/views/login_screen.dart' as navigation;
 import 'ui/router.dart';
 
 void main() async {

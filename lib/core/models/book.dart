@@ -1,63 +1,35 @@
-import 'dart:convert';
-
 import 'package:json_annotation/json_annotation.dart';
 
 part 'book.g.dart';
 
 @JsonSerializable()
 class Book {
-  String? author;
-
-  @JsonKey(name: 'date')
-  DateTime? date;
-  String? detail;
+  String id;
   String title;
-  String imgUrl;
-  String bookFileName;
-  int id;
-  int? price;
-  double rating;
+  String? description;
+  int isbn;
+  int pages;
+  String? file;
+  String? cover;
+  String? aiFile;
+  String? audioFile;
+  DateTime? publishDate;
+  List<String> authors;
+  List<String> categories;
   Book({
-    this.author,
-    this.date,
-    this.detail,
-    required this.title,
-    required this.imgUrl,
-    required this.bookFileName,
     required this.id,
-    this.price,
-    required this.rating,
+    required this.title,
+    this.description,
+    required this.isbn,
+    required this.pages,
+    this.file,
+    this.cover,
+    this.aiFile,
+    this.audioFile,
+    this.publishDate,
+    required this.authors,
+    required this.categories,
   });
-
-  Map<String, dynamic> toMap() {
-    return {
-      'author': author,
-      'date': date,
-      'detail': detail,
-      'title': title,
-      'imgUrl': imgUrl,
-      'bookFileName': bookFileName,
-      'id': id,
-      'price': price,
-      'rating': rating,
-    };
-  }
-
-  factory Book.fromMap(Map<String, dynamic> map) {
-    return Book(
-      author: map['author'],
-      date: DateTime.fromMillisecondsSinceEpoch(map['date']),
-      detail: map['detail'],
-      title: map['title'],
-      imgUrl: map['imgUrl'],
-      bookFileName: map['bookFileName'],
-      id: map['id'],
-      price: map['price'],
-      rating: map['rating'],
-    );
-  }
-
-  String toJson() => json.encode(toMap());
-
-  factory Book.fromJson(String source) => Book.fromMap(json.decode(source));
+  factory Book.fromJson(Map<String, dynamic> json) => _$BookFromJson(json);
+  Map<String, dynamic> toJson() => _$BookToJson(this);
 }

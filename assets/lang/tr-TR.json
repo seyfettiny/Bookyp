@@ -1,5 +1,9 @@
 {
     "title":"Bookyp",
     "hello_world":"Merhaba Dünya",
-    "login":"Giriş Yap"
+    "login":"Giriş Yap",
+    "signup":"Kaydol",
+    "email":"Email",
+    "password":"Şifre",
+    "or":"yada"
 }

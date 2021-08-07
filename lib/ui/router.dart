@@ -1,4 +1,5 @@
-import 'package:bookyp/ui/views/home_screen.dart';
+import 'views/home_screen.dart';
+import 'views/signup_screen.dart';
 
 import '../core/constants/route_paths.dart';
 
@@ -15,6 +16,8 @@ class Router {
     switch (settings.name) {
       case RoutePaths.login:
         return MaterialPageRoute(builder: (_) => LoginScreen());
+      case RoutePaths.signup:
+        return CupertinoPageRoute(builder: (_) => SignUpScreen());
       case RoutePaths.home:
         return MaterialPageRoute(builder: (_) => HomeScreen());
       default:

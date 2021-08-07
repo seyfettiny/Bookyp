@@ -8,26 +8,36 @@ part of 'book.dart';
 
 Book _$BookFromJson(Map<String, dynamic> json) {
   return Book(
-    author: json['author'] as String?,
-    date: json['date'] == null ? null : DateTime.parse(json['date'] as String),
-    detail: json['detail'] as String?,
+    id: json['id'] as String,
     title: json['title'] as String,
-    imgUrl: json['imgUrl'] as String,
-    bookFileName: json['bookFileName'] as String,
-    id: json['id'] as int,
-    price: json['price'] as int?,
-    rating: (json['rating'] as num).toDouble(),
+    description: json['description'] as String?,
+    isbn: json['isbn'] as int,
+    pages: json['pages'] as int,
+    file: json['file'] as String?,
+    cover: json['cover'] as String?,
+    aiFile: json['aiFile'] as String?,
+    audioFile: json['audioFile'] as String?,
+    publishDate: json['publishDate'] == null
+        ? null
+        : DateTime.parse(json['publishDate'] as String),
+    authors:
+        (json['authors'] as List<dynamic>).map((e) => e as String).toList(),
+    categories:
+        (json['categories'] as List<dynamic>).map((e) => e as String).toList(),
   );
 }
 
 Map<String, dynamic> _$BookToJson(Book instance) => <String, dynamic>{
-      'author': instance.author,
-      'date': instance.date?.toIso8601String(),
-      'detail': instance.detail,
-      'title': instance.title,
-      'imgUrl': instance.imgUrl,
-      'bookFileName': instance.bookFileName,
       'id': instance.id,
-      'price': instance.price,
-      'rating': instance.rating,
+      'title': instance.title,
+      'description': instance.description,
+      'isbn': instance.isbn,
+      'pages': instance.pages,
+      'file': instance.file,
+      'cover': instance.cover,
+      'aiFile': instance.aiFile,
+      'audioFile': instance.audioFile,
+      'publishDate': instance.publishDate?.toIso8601String(),
+      'authors': instance.authors,
+      'categories': instance.categories,
     };

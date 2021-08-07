@@ -1,5 +1,10 @@
 {
     "title":"Bookyp",
     "hello_world":"Hello World",
-    "login":"Login"
+    "login":"Login",
+    "signup":"Signup",
+    "email":"Email",
+    "password":"Password",
+    "or":"or"
+
 }
